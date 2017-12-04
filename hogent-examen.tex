@@ -1,0 +1,105 @@
+%%==============================================================================
+%% LaTeX-stijl HoGent examenopgave, academiejaar 17-18
+%%==============================================================================
+%% Auteur: Bert Van Vreckem <bert.vanvreckem@hogent.be>
+
+%%---------- Packages ----------------------------------------------------------
+
+\usepackage{graphicx}
+\usepackage[dutch]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{tabulary}
+
+% Lettertype en symbolen
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{wasysym,amssymb,latexsym,amsfonts}
+
+% Source code
+\usepackage{listings}
+\lstset{%
+  language=Bash,
+  breaklines=true,
+  frame=single,
+  numbers=right,
+  showtabs=true,
+  showspaces=true,
+  xleftmargin=3pt,
+  xrightmargin=20pt
+}
+
+%%---------- Layout ------------------------------------------------------------
+
+\setlength{\parindent}{0pt}              % Niet inspringen bij nieuwe paragrafen
+
+\setlength\extrarowheight{9pt}           % Wat meer ruimte in invulhoofding
+
+\setlength{\fboxsep}{9pt}                % Invulvak naam in paginahoofding
+
+\renewcommand{\familydefault}{\sfdefault} % Schreefloos lettertype
+
+\pointsinmargin
+\marginpointname{pt}
+\addpoints
+
+%%---------- Paginahoofding ----------------------------------------------------
+
+\pagestyle{headandfoot}
+\extraheadheight{1cm}
+
+\firstpageheader{}%
+{}%
+{ \includegraphics[height=2cm]{img/HoGent-FMW} \hspace{.5cm} 
+  \includegraphics[height=2cm]{img/HoGent-FBO} \hspace{.5cm}
+  \includegraphics[height=2cm]{img/HoGent-FNT}
+}
+
+\runningheader{\includegraphics{img/HoGent}}%
+{}%
+{\fbox{Voornaam en naam: \hspace{9cm}}}
+
+\runningfootrule
+\runningfooter{\olod, \reeks \ifsolution : Voorbeeldoplossing\fi}%
+{}%
+{p. \thepage/\numpages}
+
+%%---------- Voorbeeldoplossing ------------------------------------------------
+
+\newif\ifsolution % Vlag die aanduidt of de oplossing afgedrukt moet worden
+
+%%---------- Invulhoofding -----------------------------------------------------
+
+\newcommand{\hoofding}{%
+\ifsolution
+\begin{center}
+  \LARGE{\textbf{VOORBEELDOPLOSSING}}
+\end{center}
+\fi
+\begin{tabulary}{\textwidth}{|L|L|}
+  \hline
+  \multicolumn{2}{|p{\textwidth}|}{\textbf{Academiejaar \academiejaar{} -- \examenperiode{} examenperiode \hfill \reeks}} \\ 
+  \hline
+  Faculteit: \faculteit                            & Examendatum: \\
+  Opleiding, afstudeerrichting en jaar: \opleiding & \examendatum \\
+  Naam van het opleidingsonderdeel: \olod          &  \\
+  dOLOD/Deelexamen: \dolod                         & Aanvangsuur examen: \\
+  Campus: \campus                                  & \examenuur \\
+  Lector(en): \lectoren                            &  \\
+  \hline
+  \multicolumn{2}{|p{\textwidth}|}{\textbf{Voornaam en naam student:}} \\
+  \hline
+  \multicolumn{2}{|p{\textwidth}|}{Studentennummer:} \\
+  \hline
+  
+  Lector bij wie de student de onderwijsactiviteit volgde: & Lesgroep: \\
+  & \\
+  \hline
+  \multicolumn{2}{|p{\textwidth}|}{\textbf{Behaald resultaat: \_\_\_\_\_ op \numpoints{}}} \\
+  \hline
+\end{tabulary}
+
+\vspace{.3cm}
+}
