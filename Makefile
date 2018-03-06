@@ -25,15 +25,15 @@ all: $(assignments) $(solutions) ## Genereer alle opgaven
 %-opl.pdf: %.tex
 	# Vervang \solution* door \solutiontrue in opgave
 	sed -i 's/^\\solution.*$$/\\solutiontrue/' $<
-	# Voorbeeldoplossing genereren met geschikte naam (NAAM-popl.pdf)
+	# Voorbeeldoplossing genereren met geschikte naam (NAAM-opl.pdf)
 	$(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $<
 	# Wijziging door sed ongedaan maken
-	git checkout -- $<
+	sed -i 's/^\\solution.*$$/\\solutionfalse/' $<
 
 .PHONY : clean mrproper
 
-clean:
+clean: ## Verwijder LaTeX hulpbestanden
 	rm -f ./*.{bak,aux,log,nav,out,snm,ptc,toc,bbl,blg,idx,ilg,ind,tcp,vrb,tps,log,lot,synctex.gz,fls,fdb_latexmk,bcf,run.xml}
 
-mrproper: clean
+mrproper: clean ## Verwijder LaTeX hulpbestanden én PDFs
 	rm *.pdf
