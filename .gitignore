@@ -127,5 +127,11 @@ sympy-plots-for-*.tex/
 # xindy
 *.xdy
 
-# Vim-LaTeX
+# Vim-Latex
 *.latexmain
+
+# ghostwriter
+*.md.backup
+
+# jabref
+*.bib.bak
