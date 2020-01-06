@@ -3,23 +3,26 @@
 %%==============================================================================
 %% Auteur: Bert Van Vreckem <bert.vanvreckem@hogent.be>
 
-\ProvidesPackage{hogent-examen}[2018/09/24 Examenopgave HOGENT]
+\ProvidesPackage{hogent-examen}[2020/01/06 Examenopgave HOGENT]
+
 
 %%---------- Packages ----------------------------------------------------------
 
 \RequirePackage{graphicx}
 \RequirePackage[dutch]{babel}
-\RequirePackage[utf8]{inputenc}
 \RequirePackage{hyperref}
+\RequirePackage{geometry}
 \RequirePackage{rotating}
-\RequirePackage{tabulary}
+\RequirePackage{booktabs}
+\RequirePackage[table]{xcolor}
 
 % Lettertype en symbolen
-\RequirePackage[T1]{fontenc}
-\RequirePackage{lmodern}
-\RequirePackage{textcomp}
+\RequirePackage{fontspec}
+%\RequirePackage{textcomp}
 \RequirePackage{wasysym,amssymb,latexsym,amsfonts}
-
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Arial}
+    
 % Source code
 \RequirePackage{listings}
 \lstset{%
@@ -35,13 +38,12 @@
 
 %%---------- Layout ------------------------------------------------------------
 
+\geometry{a4paper,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm}
+
 \setlength{\parindent}{0pt}              % Niet inspringen bij nieuwe paragrafen
-
-\setlength\extrarowheight{9pt}           % Wat meer ruimte in invulhoofding
-
+%\setlength\extrarowheight{9pt}           % Wat meer ruimte in invulhoofding
+\renewcommand{\arraystretch}{2}
 \setlength{\fboxsep}{9pt}                % Invulvak naam in paginahoofding
-
-\renewcommand{\familydefault}{\sfdefault} % Schreefloos lettertype
 
 \pointsinmargin
 \marginpointname{pt}
@@ -50,24 +52,23 @@
 %%---------- Paginahoofding ----------------------------------------------------
 
 \pagestyle{headandfoot}
-\extraheadheight{1cm}
+\extraheadheight{2cm}
+\extrafootheight{2cm}
 
-\firstpageheader{\fbox{Voornaam en naam: \hspace{11cm}}}%
-{}%
-{p. \thepage/\numpages}
+\firstpageheader{\textbf{Datum examen:} \examendatum}{}{}
 
-\firstpagefooter{}%
-{}%
-{\includegraphics[height=1.5cm]{img/HOGENT}}
+\firstpagefooter{}{}%
+{\includegraphics[width=2.7cm]{img/HOGENT_Logo_Pos_rgb}}
 
-\runningheader{\fbox{Voornaam en naam: \hspace{11cm}}}%
+\runningheader{%
+  \parbox{.85\textwidth}{
+    \vspace{12pt}\textbf{Datum examen:}  \examendatum \\ \\
+    \textbf{Voornaam en naam} \dotfill\\}
+  }%
 {}%
-{p. \thepage/\numpages}
+{\Large \textbf{\thepage/\numpages}}
 
-\runningfootrule
-\runningfooter{\olod, \reeks \ifsolution : Voorbeeldoplossing\fi}%
-{}%
-{\includegraphics[width=1.5cm]{img/HOGENT}}
+\runningfooter{}{}{\includegraphics[width=2.7cm]{img/HOGENT_Logo_Pos_rgb}}
 
 %%---------- Voorbeeldoplossing ------------------------------------------------
 
@@ -81,28 +82,26 @@
   \LARGE{\textbf{VOORBEELDOPLOSSING}}
 \end{center}
 \fi
-\begin{tabulary}{\textwidth}{|L|L|}
-  \hline
-  \multicolumn{2}{|p{\textwidth}|}{\textbf{Academiejaar \academiejaar{} -- \examenperiode{} examenperiode \hfill \reeks}} \\ 
-  \hline
-  Faculteit: \faculteit                            & Examendatum: \\
-  Opleiding, afstudeerrichting en jaar: \opleiding & \examendatum \\
-  Naam van het opleidingsonderdeel: \olod          &  \\
-  dOLOD/Deelexamen: \dolod                         & Aanvangsuur examen: \\
-  Campus: \campus                                  & \examenuur \\
-  Lesgever(s): \lectoren                           &  \\
-  \hline
-  \multicolumn{2}{|p{\textwidth}|}{\textbf{Voornaam en naam student:}} \\
-  \hline
-  \multicolumn{2}{|p{\textwidth}|}{Studentennummer:} \\
-  \hline
-  
-  Lector bij wie de student de onderwijsactiviteit volgde: & Lesgroep v/d onderwijsactiviteit: \\
-  & \\
-  \hline
-  \multicolumn{2}{|p{\textwidth}|}{\textbf{Behaald resultaat: \_\_\_\_\_ op \numpoints{}}} \\
-  \hline
-\end{tabulary}
 
-\vspace{.3cm}
+\begin{tabular}{m{\textwidth}}
+  \cellcolor{black} \textcolor{white}{\textbf{Academiejaar \academiejaar}} \\
+\end{tabular}
+
+\begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
+	\textbf{Voornaam en naam}    & \dotfill                                       \\
+	\textbf{Studentennummer}     & \dotfill                                       \\
+	\textbf{Opleiding}           & \opleiding \hspace*{\fill} \textbf{Jaar} \jaar \\
+	\textbf{Afstudeerrichting}   & \afstudeerrichting                             \\
+	\textbf{Klas}                & \dotfill                                       \\
+	\textbf{Opleidingsonderdeel} & \olod \hspace*{\fill}  \reeks                  \\
+	\textbf{Lesgever(s)}         & \lectoren
+\end{tabular}
+
+\hspace{\fill}
+\fcolorbox{black}{black!20}{\parbox{4cm}{
+  \centering
+  \textbf{Behaald resultaat}
+
+  \Huge \hspace{1.2cm} \textbf{/ \numpoints}
+}}
 }
