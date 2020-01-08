@@ -98,7 +98,7 @@
   \newcommand{\@labStudyProgramme}{Study programme}
   \newcommand{\@labMainSubject}{Main subject}
   \newcommand{\@labClass}{Class}
-  \newcommand{\@labInstructors}{Lecturer(s)}
+  \newcommand{\@labInstructors}{Instructor(s)}
   \newcommand{\@labYear}{Year}
   \newcommand{\@labCourseUnit}{Course unit}
   \newcommand{\@labScore}{Exam Score}
