@@ -11,66 +11,110 @@
 %---------- Packages ----------------------------------------------------------
 
 \RequirePackage{graphicx}
-\RequirePackage[dutch]{babel}
-\RequirePackage{hyperref}
-\RequirePackage{geometry}
-\RequirePackage{rotating}
-\RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
+\RequirePackage[breaklinks]{hyperref}
+\RequirePackage{booktabs}
+
+%---------- Language support --------------------------------------------------
+% This defines class options dutch (default) and english.
+
+\RequirePackage{xkeyval}
+\RequirePackage{iflang}
+
+\newif\if@dutch
+\newif\if@english
+\DeclareOptionX{dutch}{\@dutchtrue\@englishfalse}
+\DeclareOptionX{english}{\@dutchfalse\@englishtrue}
+\ExecuteOptionsX{dutch}
+\ProcessOptionsX
+
+\if@dutch
+  \RequirePackage[dutch]{babel}
+\else
+  \RequirePackage[english]{babel}
+\fi
+
+
 
 %---------- Class variables ---------------------------------------------------
-\let\@examendatum\@empty
-\let\@academiejaar\@empty
-\let\@opleiding\@empty
-\let\@afstudeerrichting\@empty
-\let\@jaar\@empty
-\let\@olod\@empty
-\let\@reeks\@empty
+
+\let\@ExamDate\@empty
+\let\@AcademicYear\@empty
+\let\@StudyProgramme\@empty
+\let\@MainSubject\@empty
+\let\@Year\@empty
+\let\@CourseUnit\@empty
+\let\@Version\@empty
 \let\@lectoren\@empty
 
-\newcommand{\examendatum}[1]{\def\@examendatum{#1}}
-\newcommand{\academiejaar}[1]{\def\@academiejaar{#1}}
-\newcommand{\opleiding}[1]{\def\@opleiding{#1}}
-\newcommand{\afstudeerrichting}[1]{\def\@afstudeerrichting{#1}}
-\newcommand{\jaar}[1]{\def\@jaar{#1}}
-\newcommand{\olod}[1]{\def\@olod{#1}}
-\newcommand{\reeks}[1]{\def\@reeks{#1}}
-\newcommand{\lectoren}[1]{\def\@lectoren{#1}}
+\newcommand{\ExamDate}[1]{\def\@ExamDate{#1}}
+\newcommand{\AcademicYear}[1]{\def\@AcademicYear{#1}}
+\newcommand{\StudyProgramme}[1]{\def\@StudyProgramme{#1}}
+\newcommand{\MainSubject}[1]{\def\@MainSubject{#1}}
+\newcommand{\Year}[1]{\def\@Year{#1}}
+\newcommand{\CourseUnit}[1]{\def\@CourseUnit{#1}}
+\newcommand{\Version}[1]{\def\@Version{#1}}
+\newcommand{\Instructors}[1]{\def\@Instructors{#1}}
 
 %% Check the variables that need to be defined for the title page
 \newcommand{\@checkvariables}{%
-  \ifx\@examendatum\@empty{%
+  \ifx\@ExamDate\@empty{%
     \ClassError{\@classname}{Exam date is undefined!}%
-      {Use the \examendatum command to define it}
+      {Use the \ExamDate command to define it}
   }\fi
-  \ifx\@academiejaar\@empty{%
+  \ifx\@AcademicYear\@empty{%
     \ClassError{\@classname}{Academic year is undefined!}%
-    {Use the \academiejaar command to define it}
+    {Use the \AcademicYear command to define it}
   }\fi
-  \ifx\@opleiding\@empty{%
+  \ifx\@StudyProgramme\@empty{%
     \ClassError{\@classname}{Study programme is undefined!}%
-    {Use the \opleiding command to define it}
+    {Use the \StudyProgramme command to define it}
   }\fi
-  \ifx\@afstudeerrichting\@empty{%
-    \ClassError{\@classname}{Main subject is undefined!}%
-    {Use the \afstudeerrichting command to define it}
-  }\fi
-  \ifx\@jaar\@empty{%
+  \ifx\@Year\@empty{%
     \ClassError{\@classname}{Year is undefined!}%
-    {Use the \jaar command to define it}
+    {Use the \Year command to define it}
   }\fi
-  \ifx\@olod\@empty{%
+  \ifx\@CourseUnit\@empty{%
     \ClassError{\@classname}{Course unit is undefined!}%
-    {Use the \olod command to define it}
+    {Use the \CourseUnit command to define it}
   }\fi
-  \ifx\@reeks\@empty{%
-    \ClassError{\@classname}{Series is undefined!}%
-    {Use the \reeks command to define it}
+  \ifx\@Version\@empty{%
+    \ClassError{\@classname}{Assignment version is undefined!}%
+    {Use the \Version command to define it}
   }\fi
-  \ifx\@lectoren\@empty{%
-    \ClassError{\@classname}{Lecturer(s) is/are undefined!}%
-    {Use the \lectoren command to define it}
+  \ifx\@Instructors\@empty{%
+    \ClassError{\@classname}{Instructor(s) is/are undefined!}%
+    {Use the \Instructors command to define it}
   }\fi
+}
+
+% Language dependent text part of the template
+\IfLanguageName{english}{%
+  \newcommand{\labExamDate}{Exam date}
+  \newcommand{\labAcademicYear}{Academic year}
+  \newcommand{\labStudentName}{First and family name}
+  \newcommand{\labEnrollmentNumber}{Enrollment number}
+  \newcommand{\labStudyProgramme}{Study programme}
+  \newcommand{\labMainSubject}{Main subject}
+  \newcommand{\labClass}{Class}
+  \newcommand{\labInstructors}{Lecturer(s)}
+  \newcommand{\labYear}{Year}
+  \newcommand{\labCourseUnit}{Course unit}
+  \newcommand{\labScore}{Score}
+  \newcommand{\labScratchNotes}{Scratch notes}
+}{%
+  \newcommand{\labExamDate}{Datum Examen}
+  \newcommand{\labAcademicYear}{Academiejaar}
+  \newcommand{\labStudentName}{Voornaam en naam}
+  \newcommand{\labEnrollmentNumber}{Studentennummer}
+  \newcommand{\labStudyProgramme}{Opleiding}
+  \newcommand{\labMainSubject}{Afstudeerrichting}
+  \newcommand{\labClass}{Klas}
+  \newcommand{\labInstructors}{Lesgever(s)}
+  \newcommand{\labYear}{Jaar}
+  \newcommand{\labCourseUnit}{Opleidingsonderdeel}
+  \newcommand{\labScore}{Behaald Resultaat}
+  \newcommand{\labScratchNotes}{Kladruimte}
 }
 
 %---------- Fonts and symbols -------------------------------------------------
@@ -83,34 +127,36 @@
 
 %---------- Page Layout -------------------------------------------------------
 
+\RequirePackage{geometry}
+
 \geometry{a4paper,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm}
 
 \setlength{\parindent}{0pt}           % Don't indent first line of a paragraph
 \renewcommand{\arraystretch}{2}
 \setlength{\fboxsep}{9pt}             % Space around framed boxes
 
-%---------- Header anf footer -------------------------------------------------
+%---------- Header and footer -------------------------------------------------
 
 \pagestyle{headandfoot}
 \extraheadheight{1.5cm}
 \extrafootheight{2cm}
 
-\firstpageheader{\textbf{Datum examen:} \@examendatum}{}{}
+\firstpageheader{\textbf{\labExamDate:} \@ExamDate}{}{}
 
 \firstpagefooter{}{}%
 {\includegraphics[width=2.7cm]{img/HOGENT_Logo_Pos_rgb}}
 
 \runningheader{%
   \parbox{.85\textwidth}{
-    \vspace{12pt}\textbf{Datum examen:}  \@examendatum \\ \\
-    \textbf{Voornaam en naam} \dotfill\\}
+    \vspace{12pt}\textbf{\labExamDate:}  \@ExamDate \\ \\
+    \textbf{\labStudentName} \dotfill\\}
   }%
 {}%
 {\Large \textbf{\thepage/\numpages}}
 
 \runningfooter{}{}{\includegraphics[width=2.7cm]{img/HOGENT_Logo_Pos_rgb}}
 
-%%---------- Voorbeeldoplossing ------------------------------------------------
+%%---------- Points -----------------------------------------------------------
 
 \pointsinmargin
 \marginpointname{pt}
@@ -120,40 +166,47 @@
 
 \newif\ifsolution % Vlag die aanduidt of de oplossing afgedrukt moet worden
 
-%%---------- Invulhoofding -----------------------------------------------------
+%%---------- Heading ----------------------------------------------------------
 
 \newcommand{\hoofding}{%
-\ifsolution
-\begin{center}
-  \LARGE{\textbf{VOORBEELDOPLOSSING}}
-\end{center}
-\fi
+  \@checkvariables
+  \ifsolution
+  \begin{center}
+    \LARGE{\textbf{VOORBEELDOPLOSSING}} % TODO
+  \end{center}
+  \fi
+  
+  \begin{tabular}{m{\textwidth}}
+    \cellcolor{black} \textcolor{white}{\textbf{\labAcademicYear \@AcademicYear}} \\
+  \end{tabular}
+  
+  \begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
+  	\textbf{\labStudentName}      & \dotfill                                                  \\
+  	\textbf{\labEnrollmentNumber} & \dotfill                                                  \\
+  	\textbf{\labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\labYear} \@Year \\
+  	\textbf{\labMainSubject}      & \@MainSubject                                             \\
+  	\textbf{\labClass}            & \dotfill                                                  \\
+  	\textbf{\labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                   \\
+  	\textbf{\labInstructors}      & \@Instructors
+  \end{tabular}
+  
+  \hspace{\fill}
+  \fcolorbox{black}{black!20}{\parbox{4cm}{
+    \centering
+    \textbf{\labScore}
+  
+    \Huge \hspace{1.2cm} \textbf{/ \numpoints}
+  }}
+}
 
-\begin{tabular}{m{\textwidth}}
-  \cellcolor{black} \textcolor{white}{\textbf{Academiejaar \@academiejaar}} \\
-\end{tabular}
+%---------- Scratch notes area ------------------------------------------------
 
-\begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
-	\textbf{Voornaam en naam}    & \dotfill                                         \\
-	\textbf{Studentennummer}     & \dotfill                                         \\
-	\textbf{Opleiding}           & \@opleiding \hspace*{\fill} \textbf{Jaar} \@jaar \\
-	\textbf{Afstudeerrichting}   & \@afstudeerrichting                              \\
-	\textbf{Klas}                & \dotfill                                         \\
-	\textbf{Opleidingsonderdeel} & \@olod \hspace*{\fill}  \@reeks                  \\
-	\textbf{Lesgever(s)}         & \@lectoren
-\end{tabular}
-
-\hspace{\fill}
-\fcolorbox{black}{black!20}{\parbox{4cm}{
-  \centering
-  \textbf{Behaald resultaat}
-
-  \Huge \hspace{1.2cm} \textbf{/ \numpoints}
-}}
-\fcolorbox{black}{black!20}{\parbox{4cm}{
-\centering
-\textbf{Behaald scripting}
-
-\Huge \hspace{1.2cm} \textbf{/ \numbonuspoints}
-}}
+\newcommand{\scratchnotes}{%
+  \ifsolution
+  \else
+  \newpage
+  \section*{\labScratchNotes}
+  
+  \fillwithdottedlines{\stretch{1}}
+  \fi
 }
