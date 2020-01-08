@@ -102,7 +102,7 @@
   \newcommand{\@labYear}{Year}
   \newcommand{\@labCourseUnit}{Course unit}
   \newcommand{\@labScore}{Exam Score}
-  \newcommand{\@labSolution}{EXAMPLE SOLUTION}
+  \newcommand{\@labSolution}{MODEL SOLUTION}
   \newcommand{\@labNoSupports}{The use of supports is \textbf{not} allowed during this examination.}
   \newcommand{\@labSupports}{During this examination, the use of the following supports is allowed:}
   \newcommand{\@labScratchNotes}{Scratch notes}
@@ -118,7 +118,7 @@
   \newcommand{\@labYear}{Jaar}
   \newcommand{\@labCourseUnit}{Opleidingsonderdeel}
   \newcommand{\@labScore}{Behaald Resultaat}
-  \newcommand{\@labSolution}{VOORBEELDOPLOSSING}
+  \newcommand{\@labSolution}{MODELOPLOSSING}
   \newcommand{\@labNoSupports}{Tijdens het examen mogen \textbf{geen} hulpmiddelen gebruikt worden.}
   \newcommand{\@labSupports}{Tijdens het examen mogen volgende hulpmiddelen gebruikt worden:}  \newcommand{\@labScratchNotes}{Kladruimte}
 }
