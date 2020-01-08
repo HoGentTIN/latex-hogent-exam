@@ -11,9 +11,7 @@
 %---------- Packages ----------------------------------------------------------
 
 \RequirePackage{graphicx}
-\RequirePackage[table]{xcolor}
 \RequirePackage[breaklinks]{hyperref}
-\RequirePackage{booktabs}
 
 %---------- Language support --------------------------------------------------
 % This defines class options dutch (default) and english.
@@ -123,11 +121,13 @@
 }
 
 %---------- Fonts and symbols -------------------------------------------------
-\RequirePackage{fontspec}
+
 \RequirePackage{wasysym,amssymb,latexsym,amsfonts}
+\RequirePackage{mathspec}
 
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Arial}
+\setmathfont(Digits,Latin){Arial}
 \setmonofont{Courier New}
 
 %---------- Page Layout -------------------------------------------------------
@@ -136,9 +136,9 @@
 
 \geometry{a4paper,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm}
 
-\setlength{\parindent}{0pt}           % Don't indent first line of a paragraph
-\renewcommand{\arraystretch}{2}
-\setlength{\fboxsep}{9pt}             % Space around framed boxes
+\setlength{\parindent}{0pt}     % Don't indent first line of a paragraph
+\renewcommand{\arraystretch}{2} % Higher table rows
+\setlength{\fboxsep}{9pt}       % Space around framed boxes
 
 %---------- Header and footer -------------------------------------------------
 
@@ -173,6 +173,9 @@
 
 %%---------- Heading ----------------------------------------------------------
 
+\RequirePackage{booktabs}
+\RequirePackage[table]{xcolor}
+
 \newcommand{\hoofding}{%
   \@checkvariables
   \ifsolution
@@ -189,7 +192,9 @@
   	\textbf{\@labStudentName}      & \dotfill                                                   \\
   	\textbf{\@labEnrollmentNumber} & \dotfill                                                   \\
   	\textbf{\@labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\@labYear} \@Year \\
+    \ifx\@MainSubject\@empty\else
   	\textbf{\@labMainSubject}      & \@MainSubject                                              \\
+    \fi
   	\textbf{\@labClass}            & \dotfill                                                   \\
   	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                    \\
   	\textbf{\@labInstructors}      & \@Instructors
@@ -205,8 +210,11 @@
 }
 
 %---------- Supports ----------------------------------------------------------
+% If students can use supports during the exam, specify them with \Supports.
+% If you leave it empty, a suitable message will be shown.
 
 \RequirePackage{xifthen}
+
 \newcommand{\Supports}[1]{%
   \ifthenelse{\isempty{#1}}%
     {\@labNoSupports
