@@ -4,7 +4,6 @@
 % Author: Bert Van Vreckem <bert.vanvreckem@hogent.be>
 
 \NeedsTeXFormat{LaTeX2e}
-\def\@classname{hogent-exam}
 \ProvidesClass{hogent-exam}[2020/01/08 Exam assignment HOGENT]
 \LoadClass{exam}
 
@@ -31,8 +30,6 @@
 \else
   \RequirePackage[english]{babel}
 \fi
-
-
 
 %---------- Class variables ---------------------------------------------------
 
@@ -84,6 +81,12 @@
     \ClassError{\@classname}{Instructor(s) is/are undefined!}%
     {Use the \Instructors command to define it}
   }\fi
+
+  \hypersetup{%
+    pdftitle=Examen \@CourseUnit,
+    pdfauthor=\@Instructors
+  }
+
 }
 
 % Language dependent text part of the template
@@ -101,7 +104,7 @@
   \newcommand{\@labScore}{Exam Score}
   \newcommand{\@labSolution}{EXAMPLE SOLUTION}
   \newcommand{\@labNoSupports}{The use of supports is \textbf{not} allowed during this examination.}
-  \newcommand{\@labSupports}{During this examination, the use of the following supports allowed:}
+  \newcommand{\@labSupports}{During this examination, the use of the following supports is allowed:}
   \newcommand{\@labScratchNotes}{Scratch notes}
 }{%
   \newcommand{\@labExamDate}{Datum Examen}
@@ -176,7 +179,7 @@
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
 
-\newcommand{\hoofding}{%
+\renewcommand{\maketitle}{%
   \@checkvariables
   \ifsolution
   \begin{center}
@@ -189,14 +192,18 @@
   \end{tabular}
   
   \begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
+    \ifsolution\else
   	\textbf{\@labStudentName}      & \dotfill                                                   \\
   	\textbf{\@labEnrollmentNumber} & \dotfill                                                   \\
+    \fi
   	\textbf{\@labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\@labYear} \@Year \\
     \ifx\@MainSubject\@empty\else
   	\textbf{\@labMainSubject}      & \@MainSubject                                              \\
     \fi
+    \ifsolution\else
   	\textbf{\@labClass}            & \dotfill                                                   \\
-  	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                    \\
+    \fi
+  	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill} \@Version                     \\
   	\textbf{\@labInstructors}      & \@Instructors
   \end{tabular}
   
@@ -216,14 +223,17 @@
 \RequirePackage{xifthen}
 
 \newcommand{\Supports}[1]{%
-  \ifthenelse{\isempty{#1}}%
-    {\@labNoSupports
-     \bigskip
-    }
-    {\@labSupports
-    
-      #1
-    }
+  \ifsolution
+  \else
+    \ifthenelse{\isempty{#1}}%
+      {\@labNoSupports
+       \bigskip
+      }
+      {\@labSupports
+      
+        #1
+      }
+  \fi
 }
 
 %---------- Instructions ------------------------------------------------------
@@ -239,7 +249,6 @@
 % }
 \newcommand{\Instructions}[1]{%
   \ifsolution
-    \hrulefill
   \else
     \IfLanguageName{english}{%
       \begin{tabular}{m{\textwidth}}
@@ -248,7 +257,7 @@
         \midrule
         Write your first name and family name on each page. \\
         \midrule
-        If you have individual education and examination aids, write `IOEM' in the top right corner of each page  `IOEM' (abbreviation for \textit{individuele onderwijs- en examenmaatregelen}). \\
+        If you have individual education and examination aids, write `IOEM' in the top right corner of each page (abbreviation for \textit{individuele onderwijs- en examenmaatregelen}). \\
         \midrule
         Check whether your copy of the exam assignment is complete. If a page is missing, please notify the instructor or proctor so you can get a new copy. \\
         \midrule
