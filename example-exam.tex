@@ -1,15 +1,15 @@
-\documentclass{hogent-exam}
+\documentclass[english]{hogent-exam}
 
 %---------- Info over het examen ----------------------------------------------
 
-\ExamDate{23 januari 2020}
+\ExamDate{23 January 2020}
 \AcademicYear{2019-2020}
-\StudyProgramme{Toegepaste informatica}
+\StudyProgramme{Applied computer science}
 \MainSubject{}                           % Afstudeerrichting
 \Year{2}                                 % Jaar in de opleiding (Modeltraject)
-\CourseUnit{Besturingssystemen: Linux}
-\Version{Reeks 1}                        % vb. Reeks 1, Inhaalexamen
-\Instructors{Nathalie Declercq, Thomas Pollet, Andy Van Maele, Bert Van Vreckem}
+\CourseUnit{Operating Systems}
+\Version{Interational Curriculum}        % vb. Reeks 1, Inhaalexamen
+\Instructors{Bert Van Vreckem}
 
 % Voorbeeldoplossing? (ja -> \solutiontrue; nee -> \solutionfalse)
 \solutiontrue
@@ -21,15 +21,15 @@
 %---------- Hulpmiddelen ------------------------------------------------------
 % Toegelaten hulpmiddelen. Laat leeg als er geen hulpmiddelen gebruikt mogen
 % worden.
-\Supports{}
+%\Supports{}
 
 % Voorbeeld:
-% \Supports{%
-%   \begin{itemize}
-%     \item Rekenmachine
-%     \item Formularium    
-%   \end{itemize}
-% }
+\Supports{%
+ \begin{itemize}
+   \item Calculator
+   \item Cheat sheet    
+ \end{itemize}
+}
 
 %---------- Richtlijnen -------------------------------------------------------
 % Algemene richtlijnen worden automatisch ingevoegd (in hetzij Nederlands,
@@ -41,9 +41,9 @@
 
 \Instructions{
   \midrule
-  \textbf{Gebruik de VM om je antwoorden eerst uit te proberen voordat je ze noteert. Start de VM op in \textit{full-screen} modus en behoud dit tijdens de gehele test.} \\
+  Please check your answers thoroughly before submitting! \\
   \midrule
-  Bij aanvang van elke vraag veronderstellen we dat je ingelogd bent als de gebruiker \texttt{student} (gewone gebruiker, lid van de groep \texttt{wheel}), en dat je je in diens home-directory bevindt. Als voor een commando root-rechten nodig zijn, dan moet je dat expliciet aangeven met \texttt{sudo}. \\
+  If your response is a real number, round to four digits after the comma. Not three. Not five either. Four. \\
 }
 
 \begin{questions}
@@ -60,13 +60,13 @@
 % Examenvragen
 %----------------------------------------------------------------------------
 
-\question[10] Waarom zijn de bananen krom?
+\question[10] What came first: the chicken, or the egg?
 
 \begin{solutionordottedlines}[2cm]
-  Daarom!
+  Yes.
 \end{solutionordottedlines}
 
-\question[1] Wie hoort niet thuis in het rijtje?
+\question[1] One is not like the others. Who?
 
 \begin{oneparcheckboxes}
   \choice George
