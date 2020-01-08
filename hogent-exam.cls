@@ -186,12 +186,12 @@
   \end{tabular}
   
   \begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
-  	\textbf{\@labStudentName}      & \dotfill                                                  \\
-  	\textbf{\@labEnrollmentNumber} & \dotfill                                                  \\
+  	\textbf{\@labStudentName}      & \dotfill                                                   \\
+  	\textbf{\@labEnrollmentNumber} & \dotfill                                                   \\
   	\textbf{\@labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\@labYear} \@Year \\
-  	\textbf{\@labMainSubject}      & \@MainSubject                                             \\
-  	\textbf{\@labClass}            & \dotfill                                                  \\
-  	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                   \\
+  	\textbf{\@labMainSubject}      & \@MainSubject                                              \\
+  	\textbf{\@labClass}            & \dotfill                                                   \\
+  	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                    \\
   	\textbf{\@labInstructors}      & \@Instructors
   \end{tabular}
   
@@ -210,7 +210,7 @@
 \newcommand{\Supports}[1]{%
   \ifthenelse{\isempty{#1}}%
     {\@labNoSupports
-     \bigskip¨
+     \bigskip
     }
     {\@labSupports
     
