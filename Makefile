@@ -1,9 +1,10 @@
-# Makefile
-#
-.POSIX:     # Get reliable POSIX behaviour
-.SUFFIXES:  # Ignore built-in inference rules
+# Makefile for .tex files with the hogent-exam documentclass
 
-latex_cmd := pdflatex -synctex=1 -interaction=nonstopmode -shell-escape
+.POSIX:            # Get reliable POSIX behaviour
+.SUFFIXES:         # Ignore built-in inference rules
+.DELETE_ON_ERROR:  # Delete incomplete pdf/aux/idx files when TeX aborts with an error
+
+latex_cmd := xelatex -synctex=1 -interaction=nonstopmode -shell-escape
 
 sources := $(wildcard *.tex)
 assignments := $(patsubst %.tex,%.pdf,$(sources))
@@ -16,17 +17,18 @@ help: ## Toon deze hulpboodschap
 	@printf "Oplossing genereren: make NAAM-opl.pdf\n"
 	@printf "\033[36m%s\033[0m\n" $(solutions)
 
-
 all: $(assignments) $(solutions) ## Genereer alle opgaven
 
-%.pdf: %.tex
+%.pdf %.aux: %.tex
 	$(latex_cmd) $<
+	while grep 'Rerun to get ' $*.log ; do $(latex_cmd) $< ; done
 
-%-opl.pdf: %.tex
+%-opl.pdf %-opl.aux: %.tex
 	# Vervang \solution* door \solutiontrue in opgave
 	sed -i 's/^\\solution.*$$/\\solutiontrue/' $<
 	# Voorbeeldoplossing genereren met geschikte naam (NAAM-opl.pdf)
 	$(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $<
+	while grep 'Rerun to get ' $*-opl.log ; do $(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $< ; done
 	# Wijziging door sed ongedaan maken
 	sed -i 's/^\\solution.*$$/\\solutionfalse/' $<
 
