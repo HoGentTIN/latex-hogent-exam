@@ -59,7 +59,7 @@ Indien je extra instructies wil toevoegen, dan kan dat ook. De instructies worde
 
 ## Kladruimte toevoegen
 
-Indien gewenst kan je als laatste bladzijde kladruimte invoegen. Gebruik hiervoor het commando `\scratchnotes` net voor het einde van het document.
+Indien gewenst kan je als laatste bladzijde kladruimte invoegen. Gebruik hiervoor het commando `\ScratchNotes` net voor het einde van het document.
 
 ## Voorbeeldoplossing
 
@@ -89,11 +89,7 @@ reeks3-opl.pdf
 \solutionfalse
 ```
 
-Met het commando `make all` kan je PDFs genereren voor alle .tex-bestanden in de huidige directory (die elk de broncode voor een examenreeks bevatten). Zowel de examenopgave (NAAM.pdf) als de voorbeeldoplossing (NAAM-opl.pdf) worden aangemaakt. Blijf het commando herhalen zolang je in de uitvoer de gekende boodschap blijft zien:
-
-```
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-```
+Met het commando `make all` kan je PDFs genereren voor alle .tex-bestanden in de huidige directory (die elk de broncode voor een examenreeks bevatten). Zowel de examenopgave (NAAM.pdf) als de voorbeeldoplossing (NAAM-opl.pdf) worden aangemaakt.
 
 Je kan ook individuele PDFs genereren voor opgaven met `make NAAM.pdf`, voor voorbeeldoplossingen met `make NAAM-opl.pdf`. Alle mogelijkheden worden getoond in de hulpboodschap.
 
