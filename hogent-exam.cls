@@ -157,7 +157,7 @@
 \runningheader{%
   \parbox{.85\textwidth}{
     \vspace{12pt}\textbf{\@labExamDate:}  \@ExamDate \\ \\
-    \textbf{\@labStudentName} \dotfill\\}
+    \ifsolution\else\textbf{\@labStudentName} \dotfill\fi\\}
   }%
 {}%
 {\Large \textbf{\thepage/\numpages}}
@@ -286,7 +286,7 @@
 
 %---------- Scratch notes area ------------------------------------------------
 
-\newcommand{\scratchnotes}{%
+\newcommand{\ScratchNotes}{%
   \ifsolution
   \else
   \newpage
