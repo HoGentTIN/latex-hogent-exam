@@ -45,7 +45,7 @@
 \let\@Year\@empty
 \let\@CourseUnit\@empty
 \let\@Version\@empty
-\let\@lectoren\@empty
+\let\@Instructors\@empty
 
 \newcommand{\ExamDate}[1]{\def\@ExamDate{#1}}
 \newcommand{\AcademicYear}[1]{\def\@AcademicYear{#1}}
@@ -100,7 +100,9 @@
   \newcommand{\labInstructors}{Lecturer(s)}
   \newcommand{\labYear}{Year}
   \newcommand{\labCourseUnit}{Course unit}
-  \newcommand{\labScore}{Score}
+  \newcommand{\labScore}{Exam Score}
+  \newcommand{\labNoSupports}{The use of supports is \textbf{not} allowed during this examination.}
+  \newcommand{\labSupports}{During this examination, the use of the following supports allowed:}
   \newcommand{\labScratchNotes}{Scratch notes}
 }{%
   \newcommand{\labExamDate}{Datum Examen}
@@ -114,7 +116,8 @@
   \newcommand{\labYear}{Jaar}
   \newcommand{\labCourseUnit}{Opleidingsonderdeel}
   \newcommand{\labScore}{Behaald Resultaat}
-  \newcommand{\labScratchNotes}{Kladruimte}
+  \newcommand{\labNoSupports}{Tijdens het examen mogen \textbf{geen} hulpmiddelen gebruikt worden.}
+  \newcommand{\labSupports}{Tijdens het examen mogen volgende hulpmiddelen gebruikt worden:}  \newcommand{\labScratchNotes}{Kladruimte}
 }
 
 %---------- Fonts and symbols -------------------------------------------------
@@ -177,7 +180,7 @@
   \fi
   
   \begin{tabular}{m{\textwidth}}
-    \cellcolor{black} \textcolor{white}{\textbf{\labAcademicYear \@AcademicYear}} \\
+    \cellcolor{black} \textcolor{white}{\textbf{\labAcademicYear{} \@AcademicYear}} \\
   \end{tabular}
   
   \begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
@@ -197,6 +200,69 @@
   
     \Huge \hspace{1.2cm} \textbf{/ \numpoints}
   }}
+}
+
+%---------- Supports ----------------------------------------------------------
+
+\RequirePackage{xifthen}
+\newcommand{\Supports}[1]{%
+  \ifthenelse{\isempty{#1}}%
+    {\labNoSupports
+     \bigskip¨
+    }
+    {\labSupports
+    
+      #1
+    }
+}
+
+%---------- Instructions ------------------------------------------------------
+% General instructions from the original Word template are included in each
+% exam copy. To add instructions, specify them. Each instruction is a row in a
+% table, so end each one with \\. Also, add a \midrule before each instruction.
+%
+% \Instructions{
+%   \midrule
+%   Review your answers meticulously before handing in! \\
+%   \midrule
+%   Use the back of the page if you need additional space for scratch notes. \\
+% }
+\newcommand{\Instructions}[1]{%
+  \ifsolution
+    \hrulefill
+  \else
+    \IfLanguageName{english}{%
+      \begin{tabular}{m{\textwidth}}
+        \cellcolor{black} \textcolor{white}{\textbf{Exam instructions}} \\
+        Fill out the header at the top of this page. \\
+        \midrule
+        Write your first name and family name on each page. \\
+        \midrule
+        If you have individual education and examination aids, write `IOEM' in the top right corner of each page  `IOEM' (abbreviation for \textit{individuele onderwijs- en examenmaatregelen}). \\
+        \midrule
+        Check whether your copy of the exam assignment is complete. If a page is missing, please notify the instructor or proctor so you can get a new copy. \\
+        \midrule
+        During the exam, any form of communication, either online or offline, is \textbf{strictly prohibited}, unless indicated otherwise in the exam instructions. Mobile phones, smartwatches, etc.~must be switched off (not on silent/vibration/airplane mode). They may also not be used to consult the time. Failure to follow the code of conduct is sanctioned as exam fraud. \\
+        #1
+        \bottomrule
+      \end{tabular}
+    }{%
+      \begin{tabular}{m{\textwidth}}
+        \cellcolor{black} \textcolor{white}{\textbf{Algemene richtlijnen}} \\
+        Vul het kader bovenaan in. \\
+        \midrule
+        Vul op elke bladzijde je voornaam en naam in. \\
+        \midrule
+        Heb je individuele onderwijs- en examenmaatregelen, noteer dan in de rechterbovenhoek van elke pagina `IOEM' (afkorting voor individuele onderwijs- en examenmaatregelen). \\
+        \midrule
+        Controleer of deze examenbundel alle pagina’s bevat. Indien een pagina ontbreekt, verwittig dan de lesgever of de toezichter zodat je een nieuw exemplaar kan ontvangen. \\
+        \midrule
+        Je mag geen enkele vorm van communicatie -- noch offline noch online -- gebruiken tijdens dit examen, tenzij anders aangegeven in de exameninstructies. Mobiele telefoons, smartwatches en dergelijke moeten uitgeschakeld zijn (niet op stil, trillen, vliegtuigstand, \ldots). Ze mogen tijdens het examen ook niet gebruikt worden om de tijd te raadplegen. Het niet volgen van de gedragscode wordt gesanctioneerd als examenfraude. \\
+        #1
+        \bottomrule
+      \end{tabular}
+    }
+  \fi
 }
 
 %---------- Scratch notes area ------------------------------------------------
