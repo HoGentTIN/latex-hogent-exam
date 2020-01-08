@@ -90,34 +90,36 @@
 
 % Language dependent text part of the template
 \IfLanguageName{english}{%
-  \newcommand{\labExamDate}{Exam date}
-  \newcommand{\labAcademicYear}{Academic year}
-  \newcommand{\labStudentName}{First and family name}
-  \newcommand{\labEnrollmentNumber}{Enrollment number}
-  \newcommand{\labStudyProgramme}{Study programme}
-  \newcommand{\labMainSubject}{Main subject}
-  \newcommand{\labClass}{Class}
-  \newcommand{\labInstructors}{Lecturer(s)}
-  \newcommand{\labYear}{Year}
-  \newcommand{\labCourseUnit}{Course unit}
-  \newcommand{\labScore}{Exam Score}
-  \newcommand{\labNoSupports}{The use of supports is \textbf{not} allowed during this examination.}
-  \newcommand{\labSupports}{During this examination, the use of the following supports allowed:}
-  \newcommand{\labScratchNotes}{Scratch notes}
+  \newcommand{\@labExamDate}{Exam date}
+  \newcommand{\@labAcademicYear}{Academic year}
+  \newcommand{\@labStudentName}{First and family name}
+  \newcommand{\@labEnrollmentNumber}{Enrollment number}
+  \newcommand{\@labStudyProgramme}{Study programme}
+  \newcommand{\@labMainSubject}{Main subject}
+  \newcommand{\@labClass}{Class}
+  \newcommand{\@labInstructors}{Lecturer(s)}
+  \newcommand{\@labYear}{Year}
+  \newcommand{\@labCourseUnit}{Course unit}
+  \newcommand{\@labScore}{Exam Score}
+  \newcommand{\@labSolution}{EXAMPLE SOLUTION}
+  \newcommand{\@labNoSupports}{The use of supports is \textbf{not} allowed during this examination.}
+  \newcommand{\@labSupports}{During this examination, the use of the following supports allowed:}
+  \newcommand{\@labScratchNotes}{Scratch notes}
 }{%
-  \newcommand{\labExamDate}{Datum Examen}
-  \newcommand{\labAcademicYear}{Academiejaar}
-  \newcommand{\labStudentName}{Voornaam en naam}
-  \newcommand{\labEnrollmentNumber}{Studentennummer}
-  \newcommand{\labStudyProgramme}{Opleiding}
-  \newcommand{\labMainSubject}{Afstudeerrichting}
-  \newcommand{\labClass}{Klas}
-  \newcommand{\labInstructors}{Lesgever(s)}
-  \newcommand{\labYear}{Jaar}
-  \newcommand{\labCourseUnit}{Opleidingsonderdeel}
-  \newcommand{\labScore}{Behaald Resultaat}
-  \newcommand{\labNoSupports}{Tijdens het examen mogen \textbf{geen} hulpmiddelen gebruikt worden.}
-  \newcommand{\labSupports}{Tijdens het examen mogen volgende hulpmiddelen gebruikt worden:}  \newcommand{\labScratchNotes}{Kladruimte}
+  \newcommand{\@labExamDate}{Datum Examen}
+  \newcommand{\@labAcademicYear}{Academiejaar}
+  \newcommand{\@labStudentName}{Voornaam en naam}
+  \newcommand{\@labEnrollmentNumber}{Studentennummer}
+  \newcommand{\@labStudyProgramme}{Opleiding}
+  \newcommand{\@labMainSubject}{Afstudeerrichting}
+  \newcommand{\@labClass}{Klas}
+  \newcommand{\@labInstructors}{Lesgever(s)}
+  \newcommand{\@labYear}{Jaar}
+  \newcommand{\@labCourseUnit}{Opleidingsonderdeel}
+  \newcommand{\@labScore}{Behaald Resultaat}
+  \newcommand{\@labSolution}{VOORBEELDOPLOSSING}
+  \newcommand{\@labNoSupports}{Tijdens het examen mogen \textbf{geen} hulpmiddelen gebruikt worden.}
+  \newcommand{\@labSupports}{Tijdens het examen mogen volgende hulpmiddelen gebruikt worden:}  \newcommand{\@labScratchNotes}{Kladruimte}
 }
 
 %---------- Fonts and symbols -------------------------------------------------
@@ -144,15 +146,15 @@
 \extraheadheight{1.5cm}
 \extrafootheight{2cm}
 
-\firstpageheader{\textbf{\labExamDate:} \@ExamDate}{}{}
+\firstpageheader{\textbf{\@labExamDate:} \@ExamDate}{}{}
 
 \firstpagefooter{}{}%
 {\includegraphics[width=2.7cm]{img/HOGENT_Logo_Pos_rgb}}
 
 \runningheader{%
   \parbox{.85\textwidth}{
-    \vspace{12pt}\textbf{\labExamDate:}  \@ExamDate \\ \\
-    \textbf{\labStudentName} \dotfill\\}
+    \vspace{12pt}\textbf{\@labExamDate:}  \@ExamDate \\ \\
+    \textbf{\@labStudentName} \dotfill\\}
   }%
 {}%
 {\Large \textbf{\thepage/\numpages}}
@@ -175,28 +177,28 @@
   \@checkvariables
   \ifsolution
   \begin{center}
-    \LARGE{\textbf{VOORBEELDOPLOSSING}} % TODO
+    \LARGE{\textbf{\@labSolution}}
   \end{center}
   \fi
   
   \begin{tabular}{m{\textwidth}}
-    \cellcolor{black} \textcolor{white}{\textbf{\labAcademicYear{} \@AcademicYear}} \\
+    \cellcolor{black} \textcolor{white}{\textbf{\@labAcademicYear{} \@AcademicYear}} \\
   \end{tabular}
   
   \begin{tabular}{m{.20\textwidth}m{.76\textwidth}}
-  	\textbf{\labStudentName}      & \dotfill                                                  \\
-  	\textbf{\labEnrollmentNumber} & \dotfill                                                  \\
-  	\textbf{\labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\labYear} \@Year \\
-  	\textbf{\labMainSubject}      & \@MainSubject                                             \\
-  	\textbf{\labClass}            & \dotfill                                                  \\
-  	\textbf{\labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                   \\
-  	\textbf{\labInstructors}      & \@Instructors
+  	\textbf{\@labStudentName}      & \dotfill                                                  \\
+  	\textbf{\@labEnrollmentNumber} & \dotfill                                                  \\
+  	\textbf{\@labStudyProgramme}   & \@StudyProgramme \hspace*{\fill} \textbf{\@labYear} \@Year \\
+  	\textbf{\@labMainSubject}      & \@MainSubject                                             \\
+  	\textbf{\@labClass}            & \dotfill                                                  \\
+  	\textbf{\@labCourseUnit}       & \@CourseUnit \hspace*{\fill}  \@Version                   \\
+  	\textbf{\@labInstructors}      & \@Instructors
   \end{tabular}
   
   \hspace{\fill}
   \fcolorbox{black}{black!20}{\parbox{4cm}{
     \centering
-    \textbf{\labScore}
+    \textbf{\@labScore}
   
     \Huge \hspace{1.2cm} \textbf{/ \numpoints}
   }}
@@ -207,10 +209,10 @@
 \RequirePackage{xifthen}
 \newcommand{\Supports}[1]{%
   \ifthenelse{\isempty{#1}}%
-    {\labNoSupports
+    {\@labNoSupports
      \bigskip¨
     }
-    {\labSupports
+    {\@labSupports
     
       #1
     }
@@ -271,7 +273,7 @@
   \ifsolution
   \else
   \newpage
-  \section*{\labScratchNotes}
+  \section*{\@labScratchNotes}
   
   \fillwithdottedlines{\stretch{1}}
   \fi
