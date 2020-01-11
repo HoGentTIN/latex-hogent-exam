@@ -98,3 +98,6 @@ $ make reeks1.pdf
 $ make reeks2-opl.pdf
 ```
 
+## Lettertypes
+
+Dit sjabloon maakt gebruik van de lettertypes Arial en Courier New, waarvan verondersteld wordt dat deze al geïnstalleerd zijn. Linux-gebruikers kunnen deze installeren via het `msttcorefonts` package. Omdat Arial niet geschikt is voor wiskundige formules, wordt in plaats daarvan [Fira Math](https://github.com/firamath/firamath) gebruikt. Het lettertype (in OTF-formaat) is meegeleverd voor het geval het nog niet geïnstalleerd is op je systeem.
