@@ -4,11 +4,12 @@
 .SUFFIXES:         # Ignore built-in inference rules
 .DELETE_ON_ERROR:  # Delete incomplete pdf/aux/idx files when TeX aborts with an error
 
-latex_cmd := xelatex -synctex=1 -interaction=nonstopmode -shell-escape
-
+out_dir := out
 sources := $(wildcard *.tex)
-assignments := $(patsubst %.tex,%.pdf,$(sources))
-solutions := $(patsubst %.tex,%-opl.pdf,$(sources))
+assignments := $(patsubst %.tex,$(out_dir)/%.pdf,$(sources))
+solutions := $(patsubst %.tex,$(out_dir)/%-opl.pdf,$(sources))
+
+latex_cmd := xelatex -synctex=1 -interaction=nonstopmode -shell-escape -output-directory="$(out_dir)"
 
 help: ## Toon deze hulpboodschap
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -19,23 +20,27 @@ help: ## Toon deze hulpboodschap
 
 all: $(assignments) $(solutions) ## Genereer alle opgaven
 
-%.pdf %.aux: %.tex
+$(out_dir)/%.pdf: %.tex
+	@mkdir -p "$(@D)"
 	$(latex_cmd) $<
-	while grep 'Rerun to get ' $*.log ; do $(latex_cmd) $< ; done
+	while grep 'Rerun to get ' $(out_dir)/$*.log ; do $(latex_cmd) $< ; done
 
-%-opl.pdf %-opl.aux: %.tex
+$(out_dir)/%-opl.pdf: %.tex
+	@mkdir -p "$(@D)"
 	# Vervang \solution* door \solutiontrue in opgave
 	sed -i 's/^\\solution.*$$/\\solutiontrue/' $<
 	# Voorbeeldoplossing genereren met geschikte naam (NAAM-opl.pdf)
 	$(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $<
-	while grep 'Rerun to get ' $*-opl.log ; do $(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $< ; done
+	while grep 'Rerun to get ' $(out_dir)/$*-opl.log ; do $(latex_cmd) -jobname=$(patsubst %.tex,%-opl,$<) $< ; done
 	# Wijziging door sed ongedaan maken
 	sed -i 's/^\\solution.*$$/\\solutionfalse/' $<
+	# markeer pdf als up-to-date
+	@touch $@
 
 .PHONY : clean mrproper
 
 clean: ## Verwijder LaTeX hulpbestanden
-	rm -f ./*.{bak,aux,log,nav,out,snm,ptc,toc,bbl,blg,idx,ilg,ind,tcp,vrb,tps,log,lot,synctex.gz,fls,fdb_latexmk,bcf,run.xml}
+	rm -f $(out_dir)/*.{bak,aux,log,nav,out,snm,ptc,toc,bbl,blg,idx,ilg,ind,tcp,vrb,tps,log,lot,synctex.gz,fls,fdb_latexmk,bcf,run.xml}
 
 mrproper: clean ## Verwijder LaTeX hulpbestanden én PDFs
-	rm *.pdf
+	rm $(out_dir)/*.pdf
